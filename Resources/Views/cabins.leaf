@@ -1,0 +1,19 @@
+
+#extend("base"):
+#export("content"):
+<h1>#(title)</h1>
+
+    #for(cabin in cabins):
+<div class="card border-primary mb-3" style="max-width: 20rem;">
+  <div class="card-body">
+    <h4 class="card-title">#(cabin.name)</h4>
+    #for(counselor in cabin.counselor):
+    <p class="card-text">Counselor: #(counselor.name)</p>
+    #endfor
+    <p class="card-text">List counselor and campers here</p>
+  </div>
+</div>
+    #endfor
+
+#endexport
+#endextend

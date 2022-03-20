@@ -1,0 +1,11 @@
+
+
+
+
+#extend("base"):
+#export("content"):
+<h1>Welcome to Luzerne Music Center's camper schedule portal!</h1>
+<p>If you already have an account, please login above. If you need to create an account, please contact <a href="mailto:ebrown@luzernemusic.org">Emily Brown</a>.</p>
+<img class="py-3" style="width:750px; height:500px;" src="/images/landingImage.jpg"/>
+#endexport
+#endextend

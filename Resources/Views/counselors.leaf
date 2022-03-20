@@ -1,0 +1,16 @@
+
+#extend("base"):
+#export("content"):
+<h1>#(title)</h1>
+
+    #for(counselor in counselors):
+<div class="card border-primary mb-3" style="max-width: 20rem;">
+  <div class="card-body">
+    <h4 class="card-title">#(counselor.name)</h4>
+    <p class="card-text">Is head counselor: #(counselor.isHead)</p>
+  </div>
+</div>
+    #endfor
+
+#endexport
+#endextend

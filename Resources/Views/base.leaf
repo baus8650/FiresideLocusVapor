@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" integrity="sha384-H4X+4tKc7b8s4GoMrylmy2ssQYpDHoqzPa9aKXbDwPoPUA3Ra8PA5dGzijN+ePnH" crossorigin="anonymous">
+
+  <title>#(title) | Acronyms</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md" style="background-color: rgba(1,85,67,.9);">
+      <!-- 2 -->
+      <a class="navbar-brand" style="color:#d9a020;" href="/">Fireside Locus</a>
+      <!-- 3 -->
+      <button class="navbar-toggler" type="button"
+      data-toggle="collapse" data-target="\#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false"
+      aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- 4 -->
+      <div class="collapse navbar-collapse"
+      id="navbarSupportedContent">
+        <!-- 5 -->
+        <ul class="navbar-nav mr-auto">
+          <!-- 6 -->
+          <li class="nav-item
+            #if(title == "Home page"): active #endif">
+              <a href="/" class="nav-link">Home</a>
+          </li>
+          
+          <li class="nav-item
+           #if(title == "All Categories"): active #endif">
+            <a href="/categories" class="nav-link">All Categories</a>
+          </li>
+          <li class="nav-item
+           #if(title == "Create An Acronym"): active #endif">
+            <!-- 2 -->
+            <a href="/acronyms/create" class="nav-link">
+              Create An Acronym
+            </a>
+          </li>
+          <!-- 1 -->
+          #if(!userLoggedIn):
+            <!-- 2 -->
+            <li class="nav-item #if(title == "Register"): active #endif">
+              <!-- 3 -->
+              <a href="/register" class="nav-link">Register</a>
+            </li>
+          #endif
+
+        </ul>
+        </nav>
+        <div class="container mt-3">
+#import("content")
+</div>
+<footer style="background-color: rgba(1,85,67,.9); height:50px">
+    
+<p class="text-center" style="color: #CD9912;">Copyright &copy; 2022 Tim Bausch</p>
+
+</footer>
+</body>
+</html>
+
