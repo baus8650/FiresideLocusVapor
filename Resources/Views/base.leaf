@@ -31,16 +31,25 @@
             #if(title == "Home page"): active #endif">
               <a href="/" class="nav-link">Home</a>
           </li>
-          
           <li class="nav-item
-           #if(title == "All Categories"): active #endif">
-            <a href="/categories" class="nav-link">All Categories</a>
+           #if(title == "Create A Counselor"): active #endif">
+            <!-- 2 -->
+            <a href="/counselors/create" class="nav-link">
+              Create A Counselor
+            </a>
           </li>
           <li class="nav-item
-           #if(title == "Create An Acronym"): active #endif">
+           #if(title == "Cabins"): active #endif">
             <!-- 2 -->
-            <a href="/acronyms/create" class="nav-link">
-              Create An Acronym
+            <a href="/cabins" class="nav-link">
+              Cabins
+            </a>
+          </li>
+          <li class="nav-item
+           #if(title == "Counselors"): active #endif">
+            <!-- 2 -->
+            <a href="/counselors" class="nav-link">
+              Counselors
             </a>
           </li>
           <!-- 1 -->

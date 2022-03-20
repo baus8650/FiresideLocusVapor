@@ -10,7 +10,7 @@
     #for(counselor in cabin.counselor):
     <p class="card-text">Counselor: #(counselor.name)</p>
     #endfor
-    <p class="card-text">List counselor and campers here</p>
+    <p class="card-text">List campers here</p>
   </div>
 </div>
     #endfor
