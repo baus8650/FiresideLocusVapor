@@ -28,6 +28,10 @@ public func configure(_ app: Application) throws {
     app.migrations.add(CreateCabin())
     app.migrations.add(GenerateCabins())
     app.migrations.add(CreateCounselor())
+    app.migrations.add(CreateCamper())
+    app.migrations.add(CreateGroup())
+    app.migrations.add(CreateEvent())
+    app.migrations.add(CreateCamperGroupPivot())
     app.logger.logLevel = .debug
     try app.autoMigrate().wait()
     

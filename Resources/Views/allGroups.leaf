@@ -1,0 +1,32 @@
+
+#extend("base"):
+  <!-- 1 -->
+  #export("content"):
+    <h1>All Groups</h1>
+    
+    <!-- 2 -->
+    #if(count(groups) > 0):
+      <table class="table table-bordered table-hover">
+        <thead class="thead-light">
+          <tr>
+            <th>Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- 3 -->
+          #for(group in groups):
+            <tr>
+              <td>
+                <a href="/groups/#(group.id)">
+                  #(group.name)
+                </a>
+              </td>
+            </tr>
+          #endfor
+        </tbody>
+      </table>
+    #else:
+      <h2>There aren’t any groups yet!</h2>
+    #endif
+  #endexport
+#endextend

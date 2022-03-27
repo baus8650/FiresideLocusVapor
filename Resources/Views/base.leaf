@@ -7,7 +7,9 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" integrity="sha384-H4X+4tKc7b8s4GoMrylmy2ssQYpDHoqzPa9aKXbDwPoPUA3Ra8PA5dGzijN+ePnH" crossorigin="anonymous">
-
+        #if(title == "Add a Camper" || title == "Edit Camper"):
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha384-KZO2FRYNmIHerhfYMjCIUaJeGBRXP7CN24SiNSG+wdDzgwvxWbl16wMVtWiJTcMt" crossorigin="anonymous">
+#endif
   <title>#(title) | Acronyms</title>
 </head>
 <body>
@@ -45,6 +47,13 @@
               Cabins
             </a>
           </li>
+          <li class="nav-item">
+            <a href="/campers" class="nav-link">Campers</a>
+          </li>
+          <li class="nav-item">
+            <a href="/uploaded-campers" class="nav-link">Upload Campers</a>
+          </li>
+
           <li class="nav-item
            #if(title == "Counselors"): active #endif">
             <!-- 2 -->
@@ -71,6 +80,13 @@
 <p class="text-center" style="color: #CD9912;">Copyright &copy; 2022 Tim Bausch</p>
 
 </footer>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script>
+<!-- 2 -->
+#if(title == "Add a Camper" || title == "Edit Camper"):
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha384-JnbsSLBmv2/R0fUmF2XYIcAEMPHEAO51Gitn9IjL4l89uFTIgtLF1+jqIqqd9FSk" crossorigin="anonymous"></script>
+  <!-- 3 -->
+  <script src="/scripts/createCamper.js"></script>
+#endif
 </body>
 </html>
 

@@ -20,6 +20,9 @@ final class Cabin: Model {
     @Children(for: \.$cabin)
     var counselor: [Counselor]
     
+    @Children(for: \.$cabin)
+    var campers: [Camper]
+    
     init() {}
     
     init(id: UUID? = nil, name: String) {

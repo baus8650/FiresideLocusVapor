@@ -1,0 +1,213 @@
+
+
+#extend("base"):
+  #export("content"):
+<body>
+<form id="myForm" method="post" enctype="multipart/form-data" >
+    <input type="file" name="file" id="csvFile" accept=".csv" />
+    <br />
+    <button type="submit"  class="btn btn-primary">
+        Submit (use this one)
+      </button>
+</form>
+<form id="testForm" method="post" enctype="multipart/form-data"/>
+<input type="hidden" id="firstName" name="firstName[]" value="" />
+<input type="hidden" id="lastName" name="lastName[]" value="" />
+<input type="number" id="age" name="age[]" value="" />
+<input type="hidden" id="instrument" name="instrument[]" value="" />
+<input type="hidden" id="program" name="program[]" value="" />
+<input type="hidden" id="cabin" name="cabin[]" value="" />
+<input type="hidden" id="ensemble" name="ensemble[]" value="" />
+<input type="hidden" id="groups" name="groups[]" value="" />
+<input type="hidden" id="id" name="id[]" value="" />
+
+
+    <button type="submit" onclick="console.log(document.getElementById(testForm))" class="btn btn-primary">
+        Submit
+      </button>
+</form>
+<div id="uploadedData">
+<h1>The table should be here</h1>
+    <table id="uploadedTable" class="table table-bordered table-hover"></table>
+</div>
+<button onclick="parseFile()">Process CSV File</button>
+<button onclick="test()">Test</button>
+<script>
+    var firstNamesForm = []
+    var lastNamesForm = []
+    var agesForm = []
+    var instrumentsForm = []
+    var programsForm = []
+    var cabinsForm = []
+    var ensemblesForm = []
+    var groupsForm = []
+    var idForms = []
+
+    function test() {
+        console.log(document.getElementById("sendData").value)
+    }
+    const myForm = document.getElementById("myForm");
+    const csvFile = document.getElementById("csvFile");
+
+    var sendData
+    function parseFile(e) {
+        console.log("processing file")
+        const input = csvFile.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            const text = e.target.result;
+            const data = csvToArray(text);
+            // console.log(data)
+            // console.log("1",document.getElementById("parsedData").value)
+            // document.getElementById("parsedData").value = data
+            // console.log("2",document.getElementById("parsedData").value)
+            // document.write(JSON.stringify(data));
+            // document.getElementById("sendData").v
+            // alue = data
+            sendData = data
+            document.getElementById("status").innerText = "Finished!"
+
+            // console.log(JSON.stringify(data[0]))
+            // document.getElementById("sendData").value = JSON.stringify(data[0])
+        }
+        reader.readAsText(input);
+    }
+
+    myForm.addEventListener("submit", function (e) {
+        document.getElementById("sendData").value = sendData
+        console.log(document.getElementById("sendData").value)
+    });
+
+
+    function csvToArray(str, delimiter = ",") {
+        const headers = str.slice(0, str.indexOf("\r\n")).split(delimiter);
+        const rows = str.slice(str.indexOf("\r\n") + 1).split("\r\n");
+
+
+        var body = document.getElementById("uploadedData");
+        var tbl = document.getElementById("uploadedTable");
+        var tblBody = document.createElement("tbody");
+
+        const arr = rows.map(function (row) {
+            var tableRow = document.createElement("tr");
+            const values = row.split(delimiter);
+            const el = headers.reduce(function (object, header, index) {
+                if (header === "group") {
+                    var weeks = []
+
+                    if (values[4].includes("Session A")) {
+                        weeks = ["Week 1", "Week 2"]
+                    } else if (values[4].includes("Session B")) {
+                        weeks = ["Week 3", "Week 4"]
+                    } else if (values[4].includes("Junior Session - ")) {
+                        weeks = ["Week 1", "Week 2", "Week 3", "Week 4"]
+                    } else if (values[4].includes("6 Week Session")) {
+                        weeks = ["Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8"]
+                    } else if (values[4].includes("3 Week Session")) {
+                        weeks = ["Week 2", "Week 3", "Week 4"]
+                    } else if (values[4].includes("Senior Session")) {
+                        weeks = ["Week 5", "Week 6", "Week 7", "Week 8"]
+                    } else {
+                        weeks = ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8"]
+                    }
+
+                    if (object["instrument"] === "Piano") {
+                        var groups = ["All","Piano","Piano Class",object["firstName"].replace(/\n/g, '') + " " + object["lastName"] + " "  + "Lesson"]
+                        groups.push.apply(groups, weeks)
+                        object[header] = groups
+                        var cell = document.createElement("td");
+                        var cellText = document.createTextNode(groups)
+                        groupsForm.push(groups)
+                        cell.appendChild(cellText)
+                        tableRow.appendChild(cell)
+
+                        document.getElementById("groups").value = groups
+
+                    } else {
+                        var family = ""
+                        var generalFamily = ""
+                        if (object["instrument"] === "Violin" || object["instrument"] === "Viola" || object["instrument"] === "Cello" || object["instrument"] === "Bass") {
+                            family = "String"
+                        } else if (object["instrument"] === "Percussion") {
+                            family = "Percussion"
+                        } else if (object["instrument"] === "Flute" || object["instrument"] === "Clarinet" || object["instrument"] === "Oboe" || object["instrument"] === "Bassoon") {
+                            family = "Woodwind"
+                        } else if (object["instrument"] === "French Horn" || object["instrument"] === "Trumpet" || object["instrument"] === "Tuba" || object["instrument"] === "Trombone") {
+                            family = "Brass"
+                        }
+
+                        if (object["instrument"] === "Flute" || object["instrument"] === "Clarinet" || object["instrument"] === "Oboe" || object["instrument"] === "Bassoon" || object["instrument"] === "French Horn" || object["instrument"] === "Trumpet" || object["instrument"] === "Tuba" || object["instrument"] === "Trombone") {
+                            generalFamily = "Winds"
+                        }
+
+                        var groups = ["All",object["instrument"],"Orchestra",object["firstName"].replace(/\n/g, '') + " " + object["lastName"] + " "  + "Lesson", family, generalFamily]
+                        groups.push.apply(groups, weeks)
+                        object[header] = groups
+                        var cell = document.createElement("td");
+                        var cellText = document.createTextNode(groups)
+                        groupsForm.push(groups)
+                        cell.appendChild(cellText)
+                        tableRow.appendChild(cell)
+                        document.getElementById("groups").value = groups
+                    }
+                } else {
+                    object[header] = values[index].replace(/\n/g, '');
+                    var cell = document.createElement("td");
+                    var cellText = document.createTextNode(values[index].replace(/\n/g, ''));
+                    cell.appendChild(cellText)
+                    tableRow.appendChild(cell)
+                    if (header === "firstName") {
+                        firstNamesForm.push(values[index])
+                    } else if (header === "lastName") {
+                        lastNamesForm.push(values[index])
+                    } else if (header === "lastName") {
+                        lastNamesForm.push(values[index])
+                    } else if (header === "age") {
+                        agesForm.push(values[index])
+                    } else if (header === "instrument") {
+                        instrumentsForm.push(values[index])
+                    } else if (header === "progrm") {
+                        programsForm.push(values[index])
+                    } else if (header === "cabin") {
+                        cabinsForm.push(values[index])
+                    } else if (header === "ensemble") {
+                        ensemblesForm.push(values[index])
+                    } else if (header === "id") {
+                        idForms.push(values[index])
+                    }
+
+                    document.getElementById(header).value = values[index]
+
+                }
+                // if (header === "id") {
+                //     document.getElementById("id").value = ""
+                // }
+                tblBody.appendChild(tableRow);
+                return object;
+
+            }, {});
+            document.getElementById("firstName").value = firstNamesForm
+            document.getElementById("lastName").value = lastNamesForm
+            document.getElementById("age").value = agesForm
+            document.getElementById("instrument").value = instrumentsForm
+            document.getElementById("program").value = programsForm
+            document.getElementById("cabin").value = cabinsForm
+            document.getElementById("ensemble").value = ensemblesForm
+            document.getElementById("groups").value = groupsForm
+            document.getElementById("id").value = idForms
+            console.log(document.getElementById("testForm"))
+            return el;
+
+        });
+
+        console.log(document.getElementById("testForm"))
+        tbl.appendChild(tblBody)
+        body.appendChild(tbl)
+        return arr;
+    }
+
+</script>
+</body>
+  #endexport
+#endextend

@@ -1,0 +1,65 @@
+
+
+
+<!-- 1 -->
+#extend("base"):
+  #export("content"):
+    <h1>#(title)</h1>
+
+    <!-- 2 -->
+    <form method="post">
+      <!-- 3 -->
+
+      <!-- 4 -->
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" name="name" class="form-control"
+        id="name"/>
+      </div>
+      <div class="form-group">
+        <label for="location">Location</label>
+        <input type="text" name="location" class="form-control"
+        id="location"/>
+      </div>
+      <div class="form-group">
+        <label for="startTime">Start Time</label>
+        <input type="text" name="startTime" class="form-control"
+        id="startTime"/>
+      </div>
+      <div class="form-group">
+        <label for="duration">Duration</label>
+        <input type="number" name="duration" class="form-control"
+        id="duration"/>
+      </div>
+      <div class="form-group">
+        <label for="day">Day</label>
+        <select class="form-select" id="day" name="day">
+          <option value="Sunday">Sunday</option>
+          <option value="Monday">Monday</option>
+          <option value="Tuesday">Tuesday</option>
+          <option value="Wednesday">Wednesday</option>
+          <option value="Thursday">Thursday</option>
+          <option value="Friday">Friday</option>
+          <option value="Saturday">Saturday</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="week">Week</label>
+        <input type="number" name="week" class="form-control"
+        id="week"/>
+      </div>
+
+      <label for="exampleSelect1" class="form-label mt-4">Group</label>
+            <select class="form-select" id="exampleSelect1" name="group">
+              #for(group in groups):
+              <option value="#(group.id)">#(group.name)</option>
+              #endfor
+            </select>
+
+      <!-- 7 -->
+      <button type="submit" class="btn btn-primary">
+        Submit
+      </button>
+    </form>
+  #endexport
+#endextend

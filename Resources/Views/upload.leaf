@@ -1,0 +1,11 @@
+#extend("base"):
+  #export("content"):
+
+<h1>File upload example</h1>
+
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+#endexport
+#endextend

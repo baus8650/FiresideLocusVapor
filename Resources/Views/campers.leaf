@@ -1,0 +1,31 @@
+
+#extend("base"):
+#export("content"):
+<h1>#(title)</h1>
+
+    #for(camper in campers):
+<div class="card border-primary mb-3" style="max-width: 30rem;">
+  <div class="card-body">
+    <h4 class="card-title">#(camper.firstName) #(camper.lastName)</h4>
+    <p class="card-text">age: #(camper.age)</p>
+      <p class="card-text">#(camper.id)</p>
+      <ul>
+          #for(group in camper.groups):
+          <li>#(group.name)</li>
+
+            #if(count(group.events) > 0):
+            <ul>
+                #for(event in group.events):
+                <li>#(event.name) - #(event.location)</li>
+                #endfor
+            </ul>
+          #endif
+
+          #endfor
+      </ul>
+  </div>
+</div>
+    #endfor
+
+#endexport
+#endextend
